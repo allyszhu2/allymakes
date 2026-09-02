@@ -1,0 +1,53 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--primary-foreground);
+  outline: none;
+  transition:
+    background-color var(--fade),
+    border-color var(--fade),
+    box-shadow var(--fade);
+}
+
+:global(.dark) .root {
+  background: color-mix(in oklch, var(--border) 30%, transparent);
+}
+
+.root[data-checked],
+.root[data-indeterminate] {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.root:focus-visible {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.root[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.root[aria-invalid="true"],
+.root[data-invalid] {
+  border-color: var(--destructive);
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.indicator svg {
+  width: 10px;
+  height: 10px;
+  stroke-width: 3;
+}

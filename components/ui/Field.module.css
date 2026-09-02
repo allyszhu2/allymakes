@@ -1,0 +1,25 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Controls fill the field; labels and hints stay natural width. */
+.field > :where(:not(label):not(p)) {
+  width: 100%;
+}
+
+.label {
+  width: fit-content;
+}
+
+.description {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.error {
+  font-size: var(--fs-sm);
+  color: var(--destructive);
+}

@@ -1,0 +1,7 @@
+/* Styles that belong only to this prototype. Shared tokens and classes live
+   in app/globals.css. */
+
+.wrap {
+  --gap: var(--space-6);
+  padding-block: var(--space-8);
+}

@@ -1,0 +1,63 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  font-size: var(--fs-base);
+  caption-side: bottom;
+}
+
+.thead .row {
+  border-bottom: var(--hairline) solid var(--border);
+}
+
+.tbody .row {
+  border-bottom: var(--hairline) solid var(--border);
+  transition: background-color var(--fade);
+}
+.tbody .row:last-child {
+  border-bottom: 0;
+}
+.tbody .row:hover {
+  background: color-mix(in oklch, var(--muted) 60%, transparent);
+}
+.tbody .row[data-selected="true"],
+.tbody .row[aria-selected="true"] {
+  background: var(--accent-soft);
+}
+
+.tfoot {
+  border-top: var(--hairline) solid var(--border);
+  background: color-mix(in oklch, var(--muted) 50%, transparent);
+  font-weight: 500;
+}
+
+.head {
+  height: 2.5rem;
+  padding: 0 0.5rem;
+  text-align: left;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.cell {
+  padding: 0.5rem;
+  vertical-align: middle;
+}
+
+.head:has([role="checkbox"]),
+.cell:has([role="checkbox"]) {
+  width: 2rem;
+  padding-right: 0;
+}
+
+.caption {
+  margin-top: 1rem;
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}

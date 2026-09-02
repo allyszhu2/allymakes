@@ -1,0 +1,80 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  height: var(--control-h);
+  padding: 0 10px;
+  border: var(--hairline) solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  transition:
+    background-color var(--fade),
+    border-color var(--fade),
+    color var(--fade);
+}
+.button svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.button:disabled,
+.button[data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+.primary:hover {
+  background: color-mix(in oklch, var(--primary) 90%, black);
+}
+
+.secondary {
+  background: var(--background);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+.secondary:hover,
+.secondary[data-popup-open] {
+  background: var(--muted);
+}
+
+.ghost {
+  color: var(--muted-foreground);
+}
+.ghost:hover,
+.ghost[data-popup-open] {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+.destructive {
+  color: var(--destructive);
+  border-color: color-mix(in oklch, var(--destructive) 30%, transparent);
+}
+.destructive:hover {
+  background: color-mix(in oklch, var(--destructive) 8%, transparent);
+}
+
+.sm {
+  height: var(--control-h-sm);
+  padding: 0 8px;
+  font-size: var(--fs-sm);
+  border-radius: var(--radius-sm);
+}
+.icon {
+  width: var(--control-h);
+  padding: 0;
+}

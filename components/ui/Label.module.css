@@ -1,0 +1,15 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 1;
+  user-select: none;
+}
+
+.label:has(:disabled),
+.label:has([data-disabled]) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

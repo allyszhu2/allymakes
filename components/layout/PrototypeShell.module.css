@@ -1,0 +1,47 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  border-bottom: var(--hairline) solid var(--border);
+  background: color-mix(in oklch, var(--background) 85%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.barInner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 40px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted-foreground);
+  transition: color var(--fade);
+}
+.back:hover {
+  color: var(--foreground);
+}
+
+.slash {
+  color: var(--muted-foreground);
+  opacity: 0.5;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}

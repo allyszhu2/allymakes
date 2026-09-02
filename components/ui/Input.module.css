@@ -1,0 +1,50 @@
+.input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: var(--control-h);
+  padding: 0 0.625rem;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--foreground);
+  font-size: var(--fs-base);
+  line-height: 1;
+  outline: none;
+  transition:
+    border-color var(--fade),
+    box-shadow var(--fade),
+    background-color var(--fade);
+}
+
+:global(.dark) .input {
+  background: color-mix(in oklch, var(--border) 30%, transparent);
+}
+
+.input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.input:focus-visible {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input[aria-invalid="true"],
+.input[data-invalid] {
+  border-color: var(--destructive);
+}
+.input[aria-invalid="true"]:focus-visible,
+.input[data-invalid]:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 25%, transparent);
+}
+
+.input[type="file"] {
+  padding-block: 0.3rem;
+  font-size: var(--fs-sm);
+}
