@@ -1,326 +1,432 @@
-/* Creator home — Quiet mode. Layout only; all color comes from globals.css. */
+/* Creator home. Five rows built from two row types.
+   Layout only — colour comes from globals.css, except brand gradients, which
+   carry identity and are generated in data.ts. The accent is reserved for
+   urgency: it appears on draining bars, Accept, and a date that's on you. */
 
-/* ---------------------------------------------------------------- Lead */
-.lead {
+.page {
+  --pad: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  padding-block: var(--space-8) var(--space-6);
+  gap: var(--space-8);
+  max-width: 1000px;
+  padding: var(--space-6) var(--pad) var(--space-8);
 }
 
-.leadLine {
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+/* 0 · Status line */
+.status {
+  font-size: var(--fs-md);
 }
 
-.motion {
+/* ------------------------------------------------------------------- rows */
+.row {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-6);
-  margin-top: var(--space-2);
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
-.motionItem {
+.rowHead {
   display: flex;
   align-items: baseline;
-  gap: var(--space-2);
-}
-
-.motionValue {
-  font-size: var(--fs-md);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---------------------------------------------------------------- Layout */
-.columns {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  gap: var(--space-4);
-  align-items: start;
-}
-
-@media (max-width: 940px) {
-  .columns {
-    grid-template-columns: 1fr;
-  }
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  min-width: 0;
-}
-
-.rail {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.panelTitle {
-  font-size: var(--fs-base);
-  font-weight: 500;
-}
-
-.strong {
-  font-weight: 500;
-}
-
-/* ---------------------------------------------------------------- Calendar */
-.calendar {
-  overflow: hidden;
-}
-
-.calendarHead {
-  padding: var(--space-4);
-  border-bottom: var(--hairline) solid var(--border);
-}
-
-.capacity {
-  margin-top: 4px;
-  max-width: 62ch;
-  color: var(--muted-foreground);
-}
-
-/* Keeps the appetite <Select> sitting on the text baseline. */
-.inlineSelect {
-  display: inline-flex;
-  vertical-align: middle;
-  margin-inline: 2px;
-}
-.inlineSelect [data-slot],
-.inlineSelect button {
-  min-width: 0;
-  height: 22px;
-}
-
-.week + .week {
-  border-top: var(--hairline) solid var(--border);
-}
-
-.weekLabel {
-  padding: 6px var(--space-4);
-  font-size: var(--fs-sm);
-  color: var(--muted-foreground);
-  background: var(--muted);
-}
-
-.slot {
-  display: grid;
-  grid-template-columns: 8px 76px minmax(0, 1fr) auto 92px;
-  align-items: center;
   gap: var(--space-3);
-  width: 100%;
-  padding: 9px var(--space-4);
-  text-align: left;
+}
+
+.rowTitle {
   font-size: var(--fs-base);
-  border-top: var(--hairline) solid var(--border);
-}
-.week ul > li:first-child .slot {
-  border-top: 0;
+  font-weight: 500;
 }
 
-.slotOpen {
-  cursor: pointer;
-  transition: background-color var(--fade);
-}
-.slotOpen:hover {
-  background: var(--muted);
-}
-.slotOpen:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: -2px;
-}
-
-/* Four states, drawn rather than coloured — the palette stays at seven. */
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-.open {
-  border: 1.5px solid var(--accent);
-}
-.in-play {
-  border: 1.5px solid var(--accent);
-  background: radial-gradient(circle, var(--accent) 0 1.6px, transparent 1.7px);
-}
-.sold {
-  background: var(--ink);
-}
-.held {
-  border: 1.5px dashed var(--ink-2);
-  opacity: 0.7;
-}
-
-.slotDate {
-  color: var(--muted-foreground);
-  font-variant-numeric: tabular-nums;
-}
-
-.slotTitle {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.projected {
-  margin-left: var(--space-2);
-  font-size: var(--fs-sm);
-  color: var(--muted-foreground);
-}
-
-.slotMeta {
-  color: var(--muted-foreground);
-  font-size: var(--fs-sm);
-  white-space: nowrap;
-}
-
-.urgent {
-  color: var(--danger);
-}
-
-/* The state label doubles as the affordance: on an open row it swaps to
-    "Sell slot" on hover, so no column is reserved for a button. */
-.slotEnd {
-  position: relative;
-  font-size: var(--fs-sm);
-  text-align: right;
-}
-
-.stateLabel {
-  color: var(--muted-foreground);
-  transition: opacity var(--fade);
-}
-
-.sell {
-  position: absolute;
-  inset: 0;
+.rowLink {
   display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-  color: var(--primary);
-  opacity: 0;
-  transition: opacity var(--fade);
-}
-
-.slotOpen:hover .stateLabel,
-.slotOpen:focus-visible .stateLabel {
-  opacity: 0;
-}
-.slotOpen:hover .sell,
-.slotOpen:focus-visible .sell {
-  opacity: 1;
-}
-
-/* ---------------------------------------------------------------- Action */
-.action {
-  padding: var(--space-4);
-}
-
-.actionRow {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-4);
-}
-
-.actionSecond {
-  margin-top: var(--space-3);
-  padding-top: var(--space-3);
-  border-top: var(--hairline) solid var(--border);
-}
-
-.actionBody {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  max-width: 62ch;
-  color: var(--muted-foreground);
-}
-
-.more {
-  margin-top: var(--space-3);
+  gap: 3px;
+  margin-left: auto;
   font-size: var(--fs-sm);
   color: var(--muted-foreground);
   transition: color var(--fade);
 }
-.more:hover {
+.rowLink:hover {
   color: var(--foreground);
 }
 
-/* ---------------------------------------------------------------- Rail */
-.card {
+/* Overflow goes sideways, never down. Cards bleed to the page padding so a
+   half-visible card signals there's more. */
+.strip {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   gap: var(--space-3);
-  padding: var(--space-4);
-  color: var(--muted-foreground);
+  overflow-x: auto;
+  padding-inline: var(--pad);
+  margin-inline: calc(var(--pad) * -1);
+  padding-bottom: var(--space-2);
+  scroll-padding-inline: var(--pad);
+  scrollbar-width: thin;
+}
+.strip > * {
+  scroll-snap-align: start;
 }
 
-.pulse {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.pulse li {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.rateRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.rateRange {
-  font-size: var(--fs-md);
+/* One number per card. */
+.bigNumber {
+  font-size: 26px;
   font-weight: 500;
-  color: var(--foreground);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
 
-.diagnostic {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-.diagnostic li {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  color: var(--foreground);
+.cardLabel {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
 }
 
-/* ---------------------------------------------------------------- Dialog */
-.dialogStats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
+.cardFoot {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------- 1 · bids */
+.bidCard {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 232px;
+  overflow: hidden;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+
+/* Brands are gradients — large, not a favicon. */
+.bidBrand {
+  display: flex;
+  align-items: flex-end;
+  height: 76px;
   padding: var(--space-3);
-  border-radius: var(--radius-md);
-  background: var(--muted);
-}
-.dialogStats > div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 }
 
-.dialogValue {
+.bidBrandName {
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.bidBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.bidFormat {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  margin-top: -4px;
+}
+
+.bidActions {
+  display: flex;
+  gap: var(--space-1);
+  margin-top: 2px;
+}
+
+/* A timer read as a shape, not as "expires in 5h". */
+.drainTrack {
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: color-mix(in oklch, var(--ink) 8%, transparent);
+  overflow: hidden;
+}
+
+.drainFill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
+.drainCritical {
+  background: var(--danger);
+}
+
+/* ---------------------------------------------------------- 2 · in flight */
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 268px;
+  overflow: hidden;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+
+/* The card is the video. Before filming the brand gradient stands in, and it
+   also sits behind the image so a slow thumbnail never shows a white hole. */
+.thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.thumbStandin {
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.sparkWrap {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+}
+
+.sparkline {
+  width: 84px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.sparkValue {
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.projectBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.projectTitle {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.35;
+  min-height: 2.7em;
+}
+
+.projectBrand {
   font-weight: 500;
 }
 
+/* Five segments: briefed · filming · review · scheduled · live. */
+.stageTrigger {
+  display: block;
+  cursor: default;
+}
+
+.stageTrack {
+  display: flex;
+  gap: 2px;
+}
+
+.stageSeg {
+  flex: 1;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: color-mix(in oklch, var(--ink) 10%, transparent);
+}
+
+.stageSegDone {
+  background: var(--foreground);
+}
+
+.projectLine {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+/* The accent marks the one thing that's on the creator. */
+.onYou {
+  color: var(--accent);
+}
+
+/* ----------------------------------------------------------- 3 · earnings */
+.chartBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+
+.chartLead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chartCaption {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.chartWrap {
+  position: relative;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: 150px;
+  overflow: visible;
+}
+
+.tip {
+  position: absolute;
+  top: -4px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 5px 8px;
+  border-radius: var(--radius-md);
+  background: var(--foreground);
+  color: var(--background);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tipValue {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.tipLabel {
+  font-size: var(--fs-sm);
+  opacity: 0.7;
+}
+
+.axis {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.axisNow {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+/* ------------------------------------------------------------ 4 · next up */
+.nextCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 0 0 196px;
+  padding: var(--space-3);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+
+.rateCard .cardFoot {
+  margin-top: auto;
+}
+
+/* Editable in place: the number is the input. */
+.rateInput {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.rateInput input {
+  width: 2.2ch;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+  border-bottom: var(--hairline) dashed var(--border);
+  outline: none;
+}
+.rateInput input:focus {
+  border-bottom-color: var(--foreground);
+}
+.rateInput input::-webkit-outer-spin-button,
+.rateInput input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.rateInput input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.rangeTrack {
+  position: relative;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: color-mix(in oklch, var(--ink) 10%, transparent);
+}
+
+.rangeMarker {
+  position: absolute;
+  top: 50%;
+  width: 3px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--foreground);
+  transform: translate(-50%, -50%);
+  transition: left 160ms var(--ease-out);
+}
+
+.ghostCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  flex: 0 0 196px;
+  padding: var(--space-3);
+  border: var(--hairline) dashed var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--muted-foreground);
+  text-align: left;
+  transition:
+    background-color var(--fade),
+    color var(--fade);
+}
+.ghostCard:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+
+.ghostTitle {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
 .footnote {
-  padding-block: var(--space-6) var(--space-8);
   font-size: var(--fs-sm);
   color: var(--muted-foreground);
 }

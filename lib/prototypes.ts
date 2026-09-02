@@ -17,7 +17,7 @@ export const prototypes: Prototype[] = [
     slug: "creator-home",
     title: "Creator home",
     description:
-      "Agentio creator home, Quiet mode. The slot calendar as the spine, not a stats dashboard.",
+      "Agentio creator home, Active state. Five rows built from two row types.",
     date: "2026-09-02",
     tags: ["agentio"],
   },
