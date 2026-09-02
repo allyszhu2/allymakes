@@ -2,8 +2,21 @@
 
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
-import { PrototypeShell } from "@/components/layout/PrototypeShell";
+import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
+  Building2Icon,
+  CalendarDaysIcon,
+  HandshakeIcon,
+  HomeIcon,
+  InboxIcon,
+  RadarIcon,
+  ReceiptIcon,
+  TrendingUpIcon,
+  UsersIcon,
+  WalletIcon,
+} from "lucide-react";
+import { AppShell, type NavSection } from "@/components/layout/AppShell";
 import {
   Badge,
   Button,
@@ -31,6 +44,47 @@ const appetiteItems = [2, 3, 4, 5, 6].map((n) => ({
   value: String(n),
   label: String(n),
 }));
+
+/** Sidebar for the creator app. Only Home is built; the rest set the scene. */
+const NAV: NavSection[] = [
+  {
+    items: [
+      { id: "home", label: "Home", icon: HomeIcon },
+      { id: "inbox", label: "Inbox", icon: InboxIcon, count: 2 },
+      { id: "offers", label: "Offers", icon: HandshakeIcon },
+    ],
+  },
+  {
+    label: "Your channel",
+    items: [
+      {
+        id: "slots",
+        label: "Slot calendar",
+        icon: CalendarDaysIcon,
+        items: [
+          { id: "slots-open", label: "Open" },
+          { id: "slots-booked", label: "Booked" },
+        ],
+      },
+      { id: "rate", label: "Rate & floor", icon: TrendingUpIcon },
+      { id: "audience", label: "Audience", icon: UsersIcon },
+    ],
+  },
+  {
+    label: "Money",
+    items: [
+      { id: "payouts", label: "Payouts", icon: WalletIcon },
+      { id: "invoices", label: "Invoices", icon: ReceiptIcon },
+    ],
+  },
+  {
+    label: "Discover",
+    items: [
+      { id: "demand", label: "Demand", icon: RadarIcon },
+      { id: "brands", label: "Brands", icon: Building2Icon },
+    ],
+  },
+];
 
 export default function CreatorHome() {
   const [slots, setSlots] = useState(SLOTS);
@@ -89,7 +143,7 @@ export default function CreatorHome() {
   }
 
   return (
-    <PrototypeShell title="Creator home">
+    <AppShell workspace={{ name: "Agentio" }} nav={NAV} defaultActive="home">
       <div className="page" style={{ "--page-w": "1120px" } as React.CSSProperties}>
         {/* ---- Lead line + money in motion. A timeline, not a total. ---- */}
         <header className={styles.lead}>
@@ -395,6 +449,6 @@ export default function CreatorHome() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </PrototypeShell>
+    </AppShell>
   );
 }

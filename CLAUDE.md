@@ -38,6 +38,8 @@ Optimise for speed of trying things, not for production polish.
 - New shared component: `components/ui/Thing.tsx` + `Thing.module.css`, export from `index.ts`,
   drop an example into the kitchen sink.
 - Base UI triggers take `render={<Button />}` instead of `asChild`.
+- Prototypes carry no allymakes chrome: no back link, and no header unless the prototype wants one.
+  App-shaped prototype → `AppShell` with a `nav` config. Plain page → `PrototypeShell` with no props.
 - Prototypes are client components most of the time (`"use client"` at the top is fine).
 - Keep it disposable: no tests, no abstractions until the same code is needed twice.
 

@@ -18,15 +18,16 @@ import styles from "./page.module.css";
  * Starter for a new prototype. `pnpm new <slug> "Title"` copies this folder to
  * app/(prototypes)/<slug>/ and registers it in lib/prototypes.ts.
  *
- * Everything below is throwaway — replace it with the idea. Keep the
- * PrototypeShell (or pass `bare` to drop the top bar for a full-screen mock).
+ * Everything below is throwaway — replace it with the idea. There's no header
+ * by default; pass a `title` to PrototypeShell if this one wants a bar, or
+ * swap it for AppShell to get a Linear-style sidebar around a desktop app.
  * Page-specific styles go in page.module.css; shared ones in app/globals.css.
  */
 export default function Page() {
   const [name, setName] = useState("");
 
   return (
-    <PrototypeShell title="__TITLE__">
+    <PrototypeShell>
       <div className={`page page-narrow stack ${styles.wrap}`}>
         <div className="stack" style={{ "--gap": "4px" } as React.CSSProperties}>
           <h1 className="h1">__TITLE__</h1>

@@ -20,22 +20,6 @@
   height: 40px;
 }
 
-.back {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--muted-foreground);
-  transition: color var(--fade);
-}
-.back:hover {
-  color: var(--foreground);
-}
-
-.slash {
-  color: var(--muted-foreground);
-  opacity: 0.5;
-}
-
 .title {
   font-weight: 500;
 }
