@@ -1,0 +1,253 @@
+/* Design 2 · The Feed. One creator, full-bleed, decided in a gesture. */
+
+.page {
+  /* A reel-shaped card: the meter and controls line up with it. */
+  --card-w: 332px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-4) var(--space-8);
+}
+
+/* ------------------------------------------------------------ budget meter */
+.meter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: var(--card-w);
+}
+
+.meterText {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+.meterText strong {
+  color: var(--foreground);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+.meterTrack {
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: color-mix(in oklch, var(--ink) 9%, transparent);
+  overflow: hidden;
+}
+
+.meterFill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 200ms var(--ease-out);
+}
+
+.meterOver {
+  background: var(--danger);
+}
+
+/* -------------------------------------------------------------- the card */
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  max-width: var(--card-w);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  animation: rise 200ms var(--ease-out);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.995);
+  }
+}
+
+/* The card is the video; everything else sits on top of it. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-3);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.35) 42%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.overlayTop {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.overlayBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #fff;
+}
+
+.name {
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-top: 6px;
+}
+
+.priceBig {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.priceCpm {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.75);
+  font-variant-numeric: tabular-nums;
+}
+
+.why {
+  margin-top: 4px;
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-2);
+}
+.controls > * {
+  min-width: 160px;
+}
+
+.hint {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+/* ------------------------------------------------------- the audit trail */
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 560px;
+  padding: var(--space-4);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+
+.summaryTitle {
+  font-size: var(--fs-md);
+  font-weight: 500;
+}
+
+.summaryStats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--muted);
+}
+.summaryStats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.summaryStats dt {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+.summaryStats dd {
+  margin: 0;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.picks {
+  display: flex;
+  flex-direction: column;
+}
+
+.pick {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: 7px 0;
+  border-top: var(--hairline) solid var(--border);
+}
+
+.pickName {
+  font-weight: 500;
+}
+
+.pickReason {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pickPrice {
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.pickEmpty {
+  padding: 7px 0;
+  border-top: var(--hairline) solid var(--border);
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.summaryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.note {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}

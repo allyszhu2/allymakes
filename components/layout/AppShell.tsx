@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   ChevronDownIcon,
   ChevronRightIcon,
@@ -17,6 +18,8 @@ export type NavItem = {
   icon?: LucideIcon;
   /** Right-aligned number, e.g. an unread count. */
   count?: number;
+  /** Makes the row a link. Use it to move between related prototypes. */
+  href?: string;
   /** One level of nested rows, shown indented under this one. */
   items?: NavItem[];
 };
@@ -78,21 +81,31 @@ export function AppShell({
 
   function renderItem(item: NavItem, depth = 0) {
     const Icon = item.icon;
+    const inner = (
+      <>
+        {Icon ? <Icon className={styles.itemIcon} /> : null}
+        <span className={styles.itemLabel}>{item.label}</span>
+        {item.count !== undefined ? (
+          <span className={styles.count}>{item.count}</span>
+        ) : null}
+      </>
+    );
+    const shared = {
+      className: cn(styles.item, active === item.id && styles.itemActive),
+      style: depth ? ({ paddingLeft: 30 } as React.CSSProperties) : undefined,
+      "aria-current": active === item.id ? ("page" as const) : undefined,
+    };
     return (
       <li key={item.id}>
-        <button
-          type="button"
-          className={cn(styles.item, active === item.id && styles.itemActive)}
-          style={depth ? ({ paddingLeft: 30 } as React.CSSProperties) : undefined}
-          aria-current={active === item.id ? "page" : undefined}
-          onClick={() => select(item.id)}
-        >
-          {Icon ? <Icon className={styles.itemIcon} /> : null}
-          <span className={styles.itemLabel}>{item.label}</span>
-          {item.count !== undefined ? (
-            <span className={styles.count}>{item.count}</span>
-          ) : null}
-        </button>
+        {item.href ? (
+          <Link href={item.href} {...shared}>
+            {inner}
+          </Link>
+        ) : (
+          <button type="button" {...shared} onClick={() => select(item.id)}>
+            {inner}
+          </button>
+        )}
         {item.items?.length ? (
           <ul>{item.items.map((child) => renderItem(child, depth + 1))}</ul>
         ) : null}

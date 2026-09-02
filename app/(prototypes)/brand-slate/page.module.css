@@ -1,0 +1,374 @@
+/* Design 1 · The Slate. Filters left, grid centre, live-priced slate right. */
+
+.layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr) 260px;
+  align-items: start;
+  min-height: 100%;
+}
+
+@media (max-width: 1180px) {
+  .layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+  .slate {
+    display: none;
+  }
+}
+
+/* ----------------------------------------------------------- left: filters */
+.filters {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-right: var(--hairline) solid var(--border);
+}
+
+.nlBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 7px 8px;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--muted-foreground);
+}
+.nlBox:focus-within {
+  border-color: var(--ring);
+}
+.nlBox svg {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.nlBox input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  outline: none;
+  color: var(--foreground);
+  font: inherit;
+}
+
+.interpreted {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.interpretedLabel {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.setChip {
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-sm);
+}
+
+.filterList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.fieldLabel {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.field :global(button) {
+  width: 100%;
+}
+
+.check {
+  font-size: var(--fs-base);
+  font-weight: 400;
+  align-items: flex-start;
+  line-height: 1.35;
+}
+
+.reset {
+  align-self: flex-start;
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+.reset:hover {
+  color: var(--foreground);
+}
+
+/* --------------------------------------------------------- centre: results */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  min-width: 0;
+}
+
+.count {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+.count strong {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  gap: var(--space-3);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+}
+
+.save {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-md);
+  background: color-mix(in oklch, black 45%, transparent);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  transition: background-color var(--fade);
+}
+.save:hover {
+  background: color-mix(in oklch, black 65%, transparent);
+}
+.saved {
+  background: var(--accent);
+}
+.saved:hover {
+  background: var(--accent);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--space-3);
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px var(--space-2);
+}
+
+.reach {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.empty {
+  color: var(--muted-foreground);
+}
+
+/* ------------------------------------------------------------ right: slate */
+.slate {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-height: 100dvh;
+  overflow-y: auto;
+  padding: var(--space-4);
+  border-left: var(--hairline) solid var(--border);
+}
+
+.slateHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.slateTitle {
+  font-size: var(--fs-base);
+  font-weight: 500;
+}
+
+.slateCount {
+  margin-left: auto;
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.slateEmpty {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  line-height: 1.45;
+}
+
+/* The plan being assembled in real time — this is what makes browsing feel
+   like buying. */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--muted);
+}
+.stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.stats dt {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+.stats dd {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.slateList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.slateItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slateItemHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.slateName {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slatePrice {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.remove {
+  color: var(--muted-foreground);
+  line-height: 0;
+}
+.remove:hover {
+  color: var(--destructive);
+}
+
+.reason {
+  width: 100%;
+  padding: 4px 6px;
+  border: var(--hairline) solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: var(--fs-sm);
+  outline: none;
+}
+.reason:hover {
+  border-color: var(--border);
+}
+.reason:focus {
+  border-color: var(--ring);
+  color: var(--foreground);
+}
+
+.slateActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.stale {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------- delta box */
+.deltaBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--muted);
+}
+.deltaBox > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.deltaLabel {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.deltaValue {
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.deltaSub {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.deltaNote {
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  line-height: 1.45;
+}

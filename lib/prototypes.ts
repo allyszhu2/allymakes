@@ -14,6 +14,30 @@ export type Prototype = {
 
 export const prototypes: Prototype[] = [
   {
+    slug: "brand-brief",
+    title: "Brand discovery — Brief",
+    description:
+      "Design 3. Rows are hypotheses, not categories; editing the brief re-renders them.",
+    date: "2026-09-02",
+    tags: ["agentio"],
+  },
+  {
+    slug: "brand-slate",
+    title: "Brand discovery — Slate",
+    description:
+      "Design 1. Eight filters, a grid with real prices, and a slate priced live.",
+    date: "2026-09-02",
+    tags: ["agentio"],
+  },
+  {
+    slug: "brand-feed",
+    title: "Brand discovery — Feed",
+    description:
+      "Design 2. One creator at a time, bounded deck, one batch commit at the end.",
+    date: "2026-09-02",
+    tags: ["agentio"],
+  },
+  {
     slug: "creator-home",
     title: "Creator home",
     description:
