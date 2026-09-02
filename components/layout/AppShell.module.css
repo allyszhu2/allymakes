@@ -59,19 +59,6 @@
   color: var(--muted-foreground);
 }
 
-/* Search and compose, pinned right. Decorative in a prototype. */
-.wsActions {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  margin-left: auto;
-  color: var(--muted-foreground);
-}
-.wsActions svg {
-  width: 14px;
-  height: 14px;
-}
-
 /* ---------------------------------------------------------------- Nav */
 .nav {
   display: flex;
@@ -86,7 +73,16 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 3px;
+}
+
+/* Rows are spaced so a hover or active pill never touches its neighbour.
+   Applies to nested lists too, and to a row that owns a sub-list. */
+.section ul,
+.section li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .sectionHead {

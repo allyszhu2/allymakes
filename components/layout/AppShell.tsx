@@ -5,8 +5,6 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
   CircleHelpIcon,
-  SearchIcon,
-  SquarePenIcon,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -111,10 +109,6 @@ export function AppShell({
           </span>
           <span className={styles.wsName}>{workspace.name}</span>
           <ChevronDownIcon className={styles.wsChevron} />
-          <span className={styles.wsActions}>
-            <SearchIcon />
-            <SquarePenIcon />
-          </span>
         </button>
 
         <div className={styles.nav}>
