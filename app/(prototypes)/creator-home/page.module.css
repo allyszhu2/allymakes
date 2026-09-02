@@ -1,0 +1,326 @@
+/* Creator home — Quiet mode. Layout only; all color comes from globals.css. */
+
+/* ---------------------------------------------------------------- Lead */
+.lead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block: var(--space-8) var(--space-6);
+}
+
+.leadLine {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.motion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.motionItem {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.motionValue {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- Layout */
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 940px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.panelTitle {
+  font-size: var(--fs-base);
+  font-weight: 500;
+}
+
+.strong {
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------------- Calendar */
+.calendar {
+  overflow: hidden;
+}
+
+.calendarHead {
+  padding: var(--space-4);
+  border-bottom: var(--hairline) solid var(--border);
+}
+
+.capacity {
+  margin-top: 4px;
+  max-width: 62ch;
+  color: var(--muted-foreground);
+}
+
+/* Keeps the appetite <Select> sitting on the text baseline. */
+.inlineSelect {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-inline: 2px;
+}
+.inlineSelect [data-slot],
+.inlineSelect button {
+  min-width: 0;
+  height: 22px;
+}
+
+.week + .week {
+  border-top: var(--hairline) solid var(--border);
+}
+
+.weekLabel {
+  padding: 6px var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  background: var(--muted);
+}
+
+.slot {
+  display: grid;
+  grid-template-columns: 8px 76px minmax(0, 1fr) auto 92px;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 9px var(--space-4);
+  text-align: left;
+  font-size: var(--fs-base);
+  border-top: var(--hairline) solid var(--border);
+}
+.week ul > li:first-child .slot {
+  border-top: 0;
+}
+
+.slotOpen {
+  cursor: pointer;
+  transition: background-color var(--fade);
+}
+.slotOpen:hover {
+  background: var(--muted);
+}
+.slotOpen:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+/* Four states, drawn rather than coloured — the palette stays at seven. */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.open {
+  border: 1.5px solid var(--accent);
+}
+.in-play {
+  border: 1.5px solid var(--accent);
+  background: radial-gradient(circle, var(--accent) 0 1.6px, transparent 1.7px);
+}
+.sold {
+  background: var(--ink);
+}
+.held {
+  border: 1.5px dashed var(--ink-2);
+  opacity: 0.7;
+}
+
+.slotDate {
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.slotTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.projected {
+  margin-left: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}
+
+.slotMeta {
+  color: var(--muted-foreground);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+
+.urgent {
+  color: var(--danger);
+}
+
+/* The state label doubles as the affordance: on an open row it swaps to
+    "Sell slot" on hover, so no column is reserved for a button. */
+.slotEnd {
+  position: relative;
+  font-size: var(--fs-sm);
+  text-align: right;
+}
+
+.stateLabel {
+  color: var(--muted-foreground);
+  transition: opacity var(--fade);
+}
+
+.sell {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  color: var(--primary);
+  opacity: 0;
+  transition: opacity var(--fade);
+}
+
+.slotOpen:hover .stateLabel,
+.slotOpen:focus-visible .stateLabel {
+  opacity: 0;
+}
+.slotOpen:hover .sell,
+.slotOpen:focus-visible .sell {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- Action */
+.action {
+  padding: var(--space-4);
+}
+
+.actionRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.actionSecond {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: var(--hairline) solid var(--border);
+}
+
+.actionBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 62ch;
+  color: var(--muted-foreground);
+}
+
+.more {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+  transition: color var(--fade);
+}
+.more:hover {
+  color: var(--foreground);
+}
+
+/* ---------------------------------------------------------------- Rail */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  color: var(--muted-foreground);
+}
+
+.pulse {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pulse li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rateRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.rateRange {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.diagnostic {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.diagnostic li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--foreground);
+}
+
+/* ---------------------------------------------------------------- Dialog */
+.dialogStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--muted);
+}
+.dialogStats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dialogValue {
+  font-weight: 500;
+}
+
+.footnote {
+  padding-block: var(--space-6) var(--space-8);
+  font-size: var(--fs-sm);
+  color: var(--muted-foreground);
+}

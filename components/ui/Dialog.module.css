@@ -10,6 +10,15 @@
   opacity: 0;
 }
 
+/* A closed overlay must never eat clicks. Belt and braces: if the exit
+   transition doesn't finish (a background tab pauses rAF, so the library
+   never unmounts it), the leftover node stays inert instead of covering
+   the page. */
+.backdrop[data-closed],
+.popup[data-closed] {
+  pointer-events: none;
+}
+
 .popup {
   position: fixed;
   top: 50%;

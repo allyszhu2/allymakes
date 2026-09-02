@@ -14,6 +14,14 @@ export type Prototype = {
 
 export const prototypes: Prototype[] = [
   {
+    slug: "creator-home",
+    title: "Creator home",
+    description:
+      "Agentio creator home, Quiet mode. The slot calendar as the spine, not a stats dashboard.",
+    date: "2026-09-02",
+    tags: ["agentio"],
+  },
+  {
     slug: "components",
     title: "Components",
     description: "Every component, button, and color on one page.",
